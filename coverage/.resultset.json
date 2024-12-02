@@ -1,0 +1,61 @@
+{
+  "Unit Tests": {
+    "coverage": {
+      "C:/Users/Charles.Spaanheden/Documents/GitHub/Paramore-progg-2-webserver-projekt/lib/request.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          20,
+          30,
+          30,
+          20,
+          null,
+          null,
+          null,
+          1,
+          15,
+          15,
+          15,
+          15,
+          15,
+          15,
+          null,
+          15,
+          5,
+          5,
+          5,
+          5,
+          null,
+          null,
+          15,
+          15,
+          15,
+          null,
+          null,
+          80,
+          15,
+          65,
+          65,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    "timestamp": 1733128970
+  }
+}

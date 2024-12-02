@@ -26,8 +26,7 @@ class Request
     end
 
     if @tolkningHash[-1].strip != ""
-      params = @tolkningHash[-1].split("&") #tolkningString.include?('')
-      #params = tolkningString[-1].split("&")
+      params = @tolkningHash[-1].split("&")
       parammap(params)
     end
     
@@ -35,30 +34,17 @@ class Request
     @headers = header_line.map do |line|
       header_key, header_value = line.split(':', 2)
       [header_key.strip, header_value.strip] if header_key && header_value
-    end.compact.to_h   #Hade velat göra på något annat sätt för det känns extremt fel att lägga metoder på end
-    
-    
-    
-    
-    
-    # puts @tolkningHash
-    # puts @method
-    # puts @resource
-    # puts @version
-    # puts @headers
-    # puts @params
-    
-    
+    end.compact.to_h
 
-    #puts "Method: #{method}", "resource: #{resource}", "version: #{version}" # + headers + params
-    #puts "Headers: #{@headers}"
-    #puts @tolkningHash
-    #p @tolkningHash&.map {|grej| grej.end_with?(":")}
+    #p @method
+    #p @resource
+    #p @version
+    #p @headers
+    #p @params
+
   end
   attr_reader :method, :resource, :version, :headers, :params
 end
 
-#request_string = File.read('./test/example_requests/post-login.request.txt')
-#request_string = File.read('./test/example_requests/get-examples.request.txt')
-request_string = File.read('./test/example_requests\get-fruits-with-filter.request.txt')
-Request.new(request_string)
+#request_string = File.read('test/example_requests/post-login.request.txt')
+#Request.new(request_string)

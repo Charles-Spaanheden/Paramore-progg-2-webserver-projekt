@@ -73,6 +73,33 @@ describe 'Request' do
     end
 
   end
+
+  describe 'Post-request' do
+    before do
+      @request = Request.new(File.read("test/example_requests/post-login.request.txt"))
+    end
+    
+    it 'method' do
+      assert_equal :post, @request.method
+    end
+
+    it 'resource' do
+      assert_equal "/login", @request.resource
+    end
+
+    it 'version' do
+      assert_equal "HTTP/1.1", @request.version
+    end
+
+    it 'header' do
+      assert_equal ({"Host"=>"foo.example", "Content-Type"=>"application/x-www-form-urlencoded", "Content-Length"=>"39"}), @request.headers
+    end
+
+    it 'param' do
+      assert_equal ({"username"=>"grillkorv", "password"=>"verys3cret!"}), @request.params
+    end
+
+  end
       
 end
 
