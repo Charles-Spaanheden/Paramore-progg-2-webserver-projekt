@@ -13,8 +13,8 @@ class Request
   def initialize(tolkningString)
     @headers = {}
     @params = {}
-    @tolkningHash = tolkningString.split("\n")
-    ingen_hash_line = @tolkningHash[0].split(' ')
+    tolkningHash = tolkningString.split("\n")
+    ingen_hash_line = tolkningHash[0].split(' ')
     @method, @resource, @version = ingen_hash_line
     @method = @method.downcase.to_sym
 
@@ -25,12 +25,12 @@ class Request
       @resource = @resource.split("?")[0]
     end
 
-    if @tolkningHash[-1].strip != ""
-      params = @tolkningHash[-1].split("&")
+    if tolkningHash[-1].strip != ""
+      params = tolkningHash[-1].split("&")
       parammap(params)
     end
     
-    header_line = @tolkningHash[1..-1].take_while { |sak| sak != "\n"}
+    header_line = tolkningHash[1..-1].take_while { |sak| sak != "\n"}
     @headers = header_line.map do |line|
       header_key, header_value = line.split(':', 2)
       [header_key.strip, header_value.strip] if header_key && header_value

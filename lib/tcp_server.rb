@@ -1,4 +1,5 @@
 require 'socket'
+require_relative 'request'
 
 class HTTPServer
 
@@ -10,7 +11,8 @@ class HTTPServer
         server = TCPServer.new(@port)
         puts "Listening on #{@port}"
         #router = Router.new
-        #router.add_route...
+        #router.add_route(:get, banan)
+        #router.add_route(:get, test1)
 
         while session = server.accept
             data = ""
@@ -22,13 +24,30 @@ class HTTPServer
             puts data
             puts "-" * 40 
 
-            #request = Request.new(data)
+            request = Request.new(data)
+            
+            pp request
+
+
+            if request.resource == "/"
+                html = "<h1>Hello, World //!</h1>"
+                status = 200
+            elsif request.resource == "/banan"
+                html = "<h1>Hello, World banan?!</h1> <h2>bananbananbanan</h2>"
+            elsif request.resource == "/test1"
+                html = "<h1>Test</h1>"
+            else
+                html = "<h1>Hello, World!</h1>"
+                status = 404          
+            end
+
             #router.match_route(request)
             #Sen kolla om resursen (filen finns)
 
 
+
             # Nedanstående bör göras i er Response-klass
-            html = "<h1>Hello, World!</h1>"
+
 
             session.print "HTTP/1.1 200\r\n"
             session.print "Content-Type: text/html\r\n"
