@@ -1,5 +1,6 @@
 require 'socket'
 require_relative 'request'
+require_relative 'router'
 
 class HTTPServer
 
@@ -18,7 +19,7 @@ class HTTPServer
             data = ""
             while line = session.gets and line !~ /^\s*$/
                 data += line
-            end
+            endö
             puts "RECEIVED REQUEST"
             puts "-" * 40
             puts data
@@ -27,7 +28,6 @@ class HTTPServer
             request = Request.new(data)
             
             pp request
-
 
             if request.resource == "/"
                 html = "<h1>Hello, World //!</h1>"
