@@ -46,7 +46,7 @@ class HTTPServer
             #     status = 404          
             # end
 
-            
+
             route = router.match_route(@arr_of_routes,request)
             
             if route
