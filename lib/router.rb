@@ -4,9 +4,9 @@ class Router
         @arr_of_routes = []
     end
 
-    def add_route(type,name)
+    def add_route(type,name,&block)
      if type == :get || type == :post
-         route_arr = [type,name]
+         route_arr = [type,name,block]
          @arr_of_routes << route_arr
          p @arr_of_routes
         end
@@ -18,11 +18,11 @@ class Router
         p browser_routes
         p @arr_of_routes
         p "Matching Route"
-        for routes in @arr_of_routes do
-            if routes == browser_routes
+        for route in @arr_of_routes do
+            if route[0..1] == browser_routes
                 p "Route Found"
 
-                return true
+                return route
             end
         end
         p "Route Not Found"

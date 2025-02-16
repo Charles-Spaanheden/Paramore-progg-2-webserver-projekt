@@ -22,7 +22,7 @@ require_relative '../lib/request'
 describe 'Request' do
   describe 'Get-examples' do
     before do
-      @request = Request.new(File.read("test/example_requests/get-examples.request.txt"))
+      @request = Request.new(File.read("../test/example_requests/get-examples.request.txt"))
     end
     
     it 'method' do
@@ -49,7 +49,7 @@ describe 'Request' do
 
   describe 'Get-fruits' do
     before do
-      @request = Request.new(File.read("test/example_requests/get-fruits-with-filter.request.txt"))
+      @request = Request.new(File.read("../test/example_requests/get-fruits-with-filter.request.txt"))
     end
     
     it 'method' do
@@ -76,7 +76,7 @@ describe 'Request' do
 
   describe 'Post-request' do
     before do
-      @request = Request.new(File.read("test/example_requests/post-login.request.txt"))
+      @request = Request.new(File.read("../test/example_requests/post-login.request.txt"))
     end
     
     it 'method' do

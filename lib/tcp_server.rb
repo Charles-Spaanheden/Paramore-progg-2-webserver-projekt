@@ -13,9 +13,11 @@ class HTTPServer
         server = TCPServer.new(@port)
         puts "Listening on #{@port}"
         router = Router.new
+        
         router.add_route(:get,"/banan") do
-           "<h1>Hello, World banan?!</h1> <h2>bananbananbanan</h2>"
+           File.read("../block.html")
         end
+        
         router.add_route(:get, "/test1") do
             "<h1>Test</h1>"
         end
@@ -34,35 +36,26 @@ class HTTPServer
             
             pp request
 
-            # if request.resource == "/"
-            #     html = "<h1>Hello, World //!</h1>"
-            #     status = 200
-            # elsif request.resource == "/banan"
-            #     html = "<h1>Hello, World banan?!</h1> <h2>bananbananbanan</h2>"
-            # elsif request.resource == "/test1"
-            #     html = "<h1>Test</h1>"
-            # else
-            #     html = "<h1>Hello, World!</h1>"
-            #     status = 404          
-            # end
-
 
             route = router.match_route(@arr_of_routes,request)
             
             if route
-                html = "<h1>Hello, World //!</h1>"
+                html = route[-1].call
                 status = 200
+            # elsif #finns filen i public?
+                #mdn mime_types
+                # pp "Hey"
             else
-                html = "<h1>Oh noes, World!</h1>"
+                html = "<h1>404 page not found?</h1>"
                 status = 404
             end
             #Sen kolla om resursen (filen finns)
 
 
 
-            # Nedanstående bör göras i er Response-klass
 
 
+            # Nedanstående bör göras i er Response-klass soooooooon
             session.print "HTTP/1.1 #{status}\r\n"
             session.print "Content-Type: text/html\r\n"
             session.print "\r\n"
