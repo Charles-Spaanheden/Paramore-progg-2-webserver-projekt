@@ -1,0 +1,22 @@
+h1 {
+    color:red;
+}
+
+body {
+    background-color:bisque;
+}
+
+.bild {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    animation: sans 2s infinite linear;
+    position: relative;
+    border: 2px solid black;
+    border-radius: 50%;
+}
+
+@keyframes sans {
+    0% {transform: translate(450px,150px) rotate(0deg);}
+    100% {transform: translate(450px,150px) rotate(360deg);}
+}
