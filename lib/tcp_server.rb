@@ -23,19 +23,6 @@ class HTTPServer
     def start
         server = TCPServer.new(@port)
         puts "Listening on #{@port}"
-        router = Router.new
-        
-        router.add_route(:get, "/banan") do
-           File.read("./public/block.html")  
-        end
-        
-        router.add_route(:get, "/test1") do
-            "<h1>Test</h1>"
-        end
-        
-        router.add_route(:get, "/") do
-            "<h1> / / / / / / /</h1>"
-        end
 
         while session = server.accept
             data = ""
@@ -50,8 +37,8 @@ class HTTPServer
 
             request = Request.new(data)
             pp request
-
-            route = router.match_route(@arr_of_routes, request)
+            #router = Router.new
+            route = $router.match_route(@arr_of_routes, request)
 
 
             if route
@@ -68,11 +55,15 @@ class HTTPServer
                 content_type = "text/html"
             end
 
-            session.print "HTTP/1.1 #{status}\r\n"
-            session.print "Content-Type: #{content_type}\r\n"
-            session.print "\r\n"
-            session.print body
-            session.close
+            response = Response.new(session, request)
+            response.send(status, body, content_type)
+
+
+            # session.print "HTTP/1.1 #{status}\r\n"
+            # session.print "Content-Type: #{content_type}\r\n"
+            # session.print "\r\n"
+            # session.print body
+            # session.close
         end
     end
 end

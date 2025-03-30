@@ -19,6 +19,8 @@ class Router
         p @arr_of_routes
         p "Matching Route"
         for route in @arr_of_routes do
+            p route
+            p browser_routes
             if route[0..1] == browser_routes
                 p "Route Found"
 
