@@ -2,10 +2,12 @@ require 'socket'
 require_relative 'request'
 require_relative 'router'
 require_relative 'response'
-require_relative '../app'
+
 class HTTPServer
-    def initialize(port)
+    def initialize(port, router)
         @port = port
+        @router = router
+
         @mime_types = {
             "html" => "text/html",
             "css" => "text/css",
@@ -38,8 +40,7 @@ class HTTPServer
             request = Request.new(data)
             pp request
             #router = Router.new
-            route = $router.match_route(@arr_of_routes, request)
-
+            route = @router.match_route(@arr_of_routes, request.resource)
 
             if route
                 body = route[-1].call
@@ -68,5 +69,3 @@ class HTTPServer
     end
 end
 
-server = HTTPServer.new(4567)
-server.start
