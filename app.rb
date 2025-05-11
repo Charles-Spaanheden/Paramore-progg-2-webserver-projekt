@@ -19,7 +19,7 @@ router.add_route(:get, "/banan") do
      "<h1>Test</h1>"
  end
 
-router.add_route(:get, "/dynamic/testing") do
+router.add_route(:get, "/dynamic/:id/testing") do
     "<h1>Dynamic Route</h1>"
 end
 

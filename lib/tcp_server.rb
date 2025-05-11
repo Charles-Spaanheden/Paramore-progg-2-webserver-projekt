@@ -38,12 +38,17 @@ class HTTPServer
             puts "-" * 40 
 
             request = Request.new(data)
+
+            #TODO: Post support
+            #kolla content-length i request
+            #läs in så många fler bytes från session
+
             pp request
             #router = Router.new
-            route = @router.match_route(@arr_of_routes, request.resource)
+            route = @router.match_route(request)
 
             if route
-                body = route[-1].call
+                body = route[2].call
                 status = 200
                 content_type = "text/html"
             elsif File.exist?("./public#{request.resource}")
@@ -58,13 +63,6 @@ class HTTPServer
 
             response = Response.new(session, request)
             response.send(status, body, content_type)
-
-
-            # session.print "HTTP/1.1 #{status}\r\n"
-            # session.print "Content-Type: #{content_type}\r\n"
-            # session.print "\r\n"
-            # session.print body
-            # session.close
         end
     end
 end
