@@ -6,8 +6,9 @@ class Router
 
     def add_route(type,name,&block)
      if type == :get || type == :post
-         route_arr = [type,name,block]
-         #TODO: Split name
+        pp "detta är name: #{name}"            
+         route_arr = [type,name,block]         
+         #TODO: Split name  
          @arr_of_routes << route_arr
          p @arr_of_routes
         end
@@ -17,19 +18,21 @@ class Router
         p request
         dynamicbrowser = request.resource.split("/")
         p dynamicbrowser
-        # "/user/5/banan/8"
         @arr_of_routes.each do |route|
             splitted_route = route[1].split("/")
-            p splitted_route
-            # "/user/:id/banan/:banan"
+            pp splitted_route
 
             if splitted_route.length == dynamicbrowser.length
                 matchning = true
-                p "#{splitted_route} och #{dynamicbrowser} är lika långa"
+                pp "#{splitted_route} och #{dynamicbrowser} är lika långa i arrayen"
                 splitted_route.each_with_index do |part, index|
+                    # require 'debug'
+                    # binding.break
                     if part.include?(":")
                         request.params[part] = dynamicbrowser[index]
-                        p request.params
+                        pp request.params
+                        pp "THIS IS PART #{part}"
+                        pp "THIS IS BROWSER #{dynamicbrowser[index]}"
                     elsif part == dynamicbrowser[index]
                         next
                     else
