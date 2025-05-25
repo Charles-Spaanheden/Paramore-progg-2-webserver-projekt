@@ -1,9 +1,16 @@
 # frozen_string_literal: true
 class Router
+    # initializes local arr_of_routes array
+    # @return [Symbol] arr_of_routes array 
     def initialize
         @arr_of_routes = []
     end
 
+    # if format is correct, creates a route into the arr_of_routes array
+    # @param type [Request] the type object
+    # @param name [Request] the name object
+    # @param block [Request] the block object
+    # @return [Array] the arr_of_routes array
     def add_route(type,name,&block)
      if type == :get || type == :post
         pp "detta är name: #{name}"            
@@ -14,6 +21,10 @@ class Router
         end
     end
 
+    # matches route received from HTTPServer and parses them if matching
+    # routes with keys have their key and value inserted into request.params
+    # @param request [Request] the request object
+    # @return [Array(nil, String, String, Proc), nil] the matching route if found
     def match_route(request)
         p request
         dynamicbrowser = request.resource.split("/")
@@ -26,10 +37,11 @@ class Router
                 matchning = true
                 pp "#{splitted_route} och #{dynamicbrowser} är lika långa i arrayen"
                 splitted_route.each_with_index do |part, index|
-                    # require 'debug'
-                    # binding.break
                     if part.include?(":")
                         request.params[part] = dynamicbrowser[index]
+                        dynamicbrowser[index] = /(\w+)/
+                        # require 'debug' 
+                        # binding.break
                         pp request.params
                         pp "THIS IS PART #{part}"
                         pp "THIS IS BROWSER #{dynamicbrowser[index]}"
@@ -48,27 +60,3 @@ class Router
         end
     end
 end
-        # p dynamicbrowser
-        # dynamicbrowser.each do |dynamic|
-        #     p "hej"
-        #     if dynamic.include?(":")
-        #         p ": hittat"     
-
-    #     p "-----------------------------------------------"
-    #     browser_routes = [browser.method,browser.resource]
-    #     p browser_routes
-    #     p @arr_of_routes
-    #     p "Matching Route"
-    #     for route in @arr_of_routes do
-    #         p route
-    #         p browser_routes
-    #         if route[0..1] == browser_routes
-    #             p "Route Found"
-
-    #             return route
-    #         end
-    #     end
-    #     p "Route Not Found"
-    #     return false
-    # end
-

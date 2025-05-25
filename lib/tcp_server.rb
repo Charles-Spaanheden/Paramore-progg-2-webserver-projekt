@@ -4,6 +4,9 @@ require_relative 'router'
 require_relative 'response'
 
 class HTTPServer
+    # initializes @port and @router symbols
+    # @param port [Request] port from socket
+    # @param router [Reuquest] router from app
     def initialize(port, router)
         @port = port
         @router = router
@@ -22,6 +25,9 @@ class HTTPServer
         }
     end
 
+    # starts the HTTP server and listens for information
+    # every new connection is parsed and sent to router for matching and then sends back a corresponding HTTP response
+    # @return [void]
     def start
         server = TCPServer.new(@port)
         puts "Listening on #{@port}"
